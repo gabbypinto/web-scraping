@@ -3,6 +3,11 @@
 * references:
   * markdown: https://guides.github.com/features/mastering-markdown/
   * django setup: https://guides.github.com/features/mastering-markdown/
+  * scraping with selenium:
+    * https://selenium-python.readthedocs.io/locating-elements.html
+    * https://stackoverflow.com/questions/51496232/how-to-extract-product-informationtitle-price-review-asin-from-all-amazon-p
+    * https://www.techbeamers.com/locate-elements-selenium-python/#locate-element-by-id
+
 
 
 * "issues" --nothing to worry about

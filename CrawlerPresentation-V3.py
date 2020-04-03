@@ -3,8 +3,8 @@ from selenium import webdriver
 import time
 
 #User Input
-lastName = raw_input("Enter The Last Name of the Defendant: ")
-firstName = raw_input("Enter The First Name of the Defendant: ")
+lastName = input("Enter The Last Name of the Defendant: ")
+firstName = input("Enter The First Name of the Defendant: ")
 
 #Open Browser
 browser = webdriver.Chrome()
@@ -42,6 +42,3 @@ while i < len(elements):
     browser.back()
     elements = browser.find_elements_by_xpath("//a[contains(@href, 'CaseDetail.aspx?CaseID=')]")
     i = i+1
-
-
-
