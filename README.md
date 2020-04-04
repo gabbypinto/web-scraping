@@ -2,7 +2,7 @@
 
 * references:
   * markdown: https://guides.github.com/features/mastering-markdown/
-  * django setup: https://guides.github.com/features/mastering-markdown/
+  * django setup: https://docs.djangoproject.com/en/3.0/intro/tutorial01/
 
 
 * "issues" --nothing to worry about
