@@ -18,6 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     #use include() when you include other URL patterms
-    path('scrape/', include('scrape.urls')),
+    path('', include('scrape.urls')), #login page?
     path('admin/', admin.site.urls),
 ]
