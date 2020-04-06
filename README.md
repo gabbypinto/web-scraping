@@ -7,6 +7,7 @@
     * https://selenium-python.readthedocs.io/locating-elements.html
     * https://stackoverflow.com/questions/51496232/how-to-extract-product-informationtitle-price-review-asin-from-all-amazon-p
     * https://www.techbeamers.com/locate-elements-selenium-python/#locate-element-by-id
+    * https://saucelabs.com/resources/articles/selenium-tips-css-selectors
 
 
 
