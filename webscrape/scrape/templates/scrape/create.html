@@ -1,0 +1,14 @@
+{% extends 'scrape/base.html' %}
+
+{% block title %} Create New List {% endblock %}
+
+{% block content %}
+Create Page
+<form method = "post" action="/create/">
+  <!-- need the csrf_token when making a file -->
+  {% csrf_token %}
+  {{form.as_p}}
+  <!-- .as_p or other ways -->
+  <button type = "submit", name="save">Create New</button>
+</form>
+{% endblock %}
