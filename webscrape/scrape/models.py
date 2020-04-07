@@ -12,7 +12,7 @@ class Item(models.Model):
 	shoppinglist = models.ForeignKey(ShoppingList, on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
 	complete = models.BooleanField()
-
+	#create a price variable
 	def __str__(self):
 		return self.text
 
