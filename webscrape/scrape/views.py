@@ -7,8 +7,25 @@ from .models import ShoppingList, Item
 from .forms import CreateNewList
 
 def index(request, id):
-    ls = ShoppingList.objects.get(id=id)
-    #the id starts at 2, 1 doesn't work
+    ls = ShoppingList.objects.get(id=id) #the id starts at 2, 1 doesn't work
+
+    #{"save": ["save"], "c1":["clicked"]}
+    #dict = name, value
+    if request.method == "POST":
+        print(request.POST)
+        if request.POST.get("save"): #save == name of the button
+            for item in ls.item_set.all():
+                if request.POST.get("c" + str(item.id)) == "clicked":
+                    item.complete = True
+                else:
+                    item.complete = False
+                item.save()
+        elif request.POST.get("newItem"):
+            txt = request.POST.get("new")
+            if len(txt) > 2:
+                ls.item_set.create(text = txt, complete=False)
+            else:
+                print("invalid")
     return render(request, "scrape/list.html",{"ls":ls})
 
 def home(request):
