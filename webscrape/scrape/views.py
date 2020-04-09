@@ -39,11 +39,14 @@ def create(request):
             n = form.cleaned_data["name"]
             t = ShoppingList(name=n)
             t.save()
+            request.user.shoppinglist.add(t)
+
         return HttpResponseRedirect("/%i" %t.id) #id refers to the todo list we want to go to
     else:
         form = CreateNewList()
 
     return render(request, "scrape/create.html", {"form":form})
-
 #POST for 'secret information' aka passwords
 #GET for modifying the database
+def view(request):
+    return render(request, "scrape/view.html")
