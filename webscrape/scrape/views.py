@@ -8,25 +8,25 @@ from .forms import CreateNewList
 
 def index(request, id):
     ls = ShoppingList.objects.get(id=id) #the id starts at 2, 1 doesn't work
-
-    #{"save": ["save"], "c1":["clicked"]}
-    #dict = name, value
-    if request.method == "POST":
-        print(request.POST)
-        if request.POST.get("save"): #save == name of the button
-            for item in ls.item_set.all():
-                if request.POST.get("c" + str(item.id)) == "clicked":
-                    item.complete = True
+    if ls in request.user.shoppingList.all():
+        #{"save": ["save"], "c1":["clicked"]}
+        #dict = name, value
+        if request.method == "POST":
+            if request.POST.get("save"): #save == name of the button
+                for item in ls.item_set.all():
+                    if request.POST.get("c" + str(item.id)) == "clicked":
+                        item.complete = True
+                    else:
+                        item.complete = False
+                    item.save()
+            elif request.POST.get("newItem"):
+                txt = request.POST.get("new")
+                if len(txt) > 2:
+                    ls.item_set.create(text = txt, complete=False)
                 else:
-                    item.complete = False
-                item.save()
-        elif request.POST.get("newItem"):
-            txt = request.POST.get("new")
-            if len(txt) > 2:
-                ls.item_set.create(text = txt, complete=False)
-            else:
-                print("invalid")
-    return render(request, "scrape/list.html",{"ls":ls})
+                    print("invalid")
+        return render(request, "scrape/list.html",{"ls":ls})
+    return render(request, "scrape/view.html",{})
 
 def home(request):
     return render(request, "scrape/home.html",{})
@@ -34,13 +34,11 @@ def home(request):
 def create(request):
     if request.method == "POST":
         form = CreateNewList(request.POST)
-
         if form.is_valid():
             n = form.cleaned_data["name"]
             t = ShoppingList(name=n)
             t.save()
-            request.user.shoppinglist.add(t)
-
+            request.user.shoppingList.add(t)
         return HttpResponseRedirect("/%i" %t.id) #id refers to the todo list we want to go to
     else:
         form = CreateNewList()
