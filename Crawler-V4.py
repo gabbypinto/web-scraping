@@ -1,48 +1,70 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import NoAlertPresentException
+from selenium.common.exceptions import UnexpectedAlertPresentException
+from selenium.common.exceptions import NoSuchElementException
+import time # for time.sleep(#seconds)
 
-import time
-
-#User Input
-inLink = input("Enter any Link to the Product: ")
-
+chrome_options = Options()
+chrome_options.add_argument("--disable-extensions")
+chrome_options.add_argument('--ignore-certificate-errors')
+chrome_options.add_argument("--disable-notifications")
+# chrome_options.add_argument('--headless') <--research but not too important atm
 #Open Browser
-browser = webdriver.Chrome(executable_path='/Users/gabbypinto/Documents/CPSC_Courses/CPSC_353/web-scraping/chromedriver')
+browser = webdriver.Chrome(options=chrome_options,executable_path='/Users/gabbypinto/Documents/CPSC_Courses/CPSC_353/web-scraping/chromedriver')
+browser.minimize_window()
+#handles alert and popup boxes
+if NoAlertPresentException:
+    pass
+elif UnexpectedAlertPresentException:
+    alert_obj = browser.switch_to.alert
+    alert_obj.dismiss()
+#User Inputs the link
+inLink = input("Enter product link: ")
 browser.get(inLink)
-time.sleep(1)
+
+# grabs the title of the product, which is usually tagged with a h1
+productTitle = browser.find_element_by_tag_name('h1').text  #works for almost all websites
+print(productTitle)
 
 
-bestBuyTitle = browser.find_element_by_tag_name('h1').text  #works for most websites
-print(bestBuyTitle)
+try:
+    price = browser.find_element_by_css_selector("span[class*='price']") #don't change this, this works for most websites
+    print(price.text)
+except NoSuchElementException:
+    pass
 
-#NEED A SERIES OF IF ELSE STATEMENTS HERE....
+try:
+    price = browser.find_element_by_css_selector("span[class*='Price']")
+    print(price.text)
+except NoSuchElementException:
+    pass
 
-# price = browser.find_element_by_css_selector("span[class*='price']").text #works but prints twice for some reason, this is for matching substring= "price"
-# print(price)
+try:
+    price = browser.find_element_by_css_selector("span[id*='price']")
+    print(price.text)
+except NoSuchElementException:
+    pass
 
-#if the above doesn't work then do...
-# price = browser.find_element_by_css_selector("span[id*='price']").text #works but prints twice for some reason
-# print(price)
+try:
+    price = browser.find_element_by_css_selector("div[class*='price']")
+    print(price.text)
+except NoSuchElementException:
+    pass
 
-# also do for div id
-#also do for div class
+try:
+    price = browser.find_element_by_css_selector("div[id*='price']")
+    print(price.text)
+except NoSuchElementException:
+    pass
+
+try:
+    price = browser.find_element_by_css_selector("div[id*='ItemPrice']")
+    print(price.text)
+except NoSuchElementException:
+    pass
 
 browser.close()
 
-
-
-#if price is not found, that means we have to use googleShopsAPI to find the cheapest one
-# use try block or something bc of NoSuchElementException
-
-
-
-#don't use this, this is just for reference...
-
-#search---with find_element_by_name method
-# productTitle = browser.find_element_by_id('productTitle').text
-# print(productTitle)
-#
-# productPrice = browser.find_element_by_id('priceblock_ourprice').text
-# print(productPrice)
-
-#bestBuyPrice = browser.find_element_by_class_name('price').text
-#price = browser.find_element_by_partial_class_name('price').text
+# print(price.text)
+# print(price.size)

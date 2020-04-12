@@ -2,6 +2,9 @@ from selenium import webdriver
 
 import time
 
+#see later? ...
+#browser = webdriver.Chrome("C:\Program Files (x86)\Google\Chrome\chromedriver.exe")
+
 #User Input
 lastName = input("Enter The Last Name of the Defendant: ")
 firstName = input("Enter The First Name of the Defendant: ")
