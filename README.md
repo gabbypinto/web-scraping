@@ -9,6 +9,7 @@
     * https://stackoverflow.com/questions/51496232/how-to-extract-product-informationtitle-price-review-asin-from-all-amazon-p
     * https://www.techbeamers.com/locate-elements-selenium-python/#locate-element-by-id
     * https://saucelabs.com/resources/articles/selenium-tips-css-selectors
+    * https://stackoverflow.com/questions/15510882/selenium-get-coordinates-or-dimensions-of-element-with-python
   * alert popups
     * http://allselenium.info/python-selenium-handle-alerts-prompts-confirmation-popups/
 
