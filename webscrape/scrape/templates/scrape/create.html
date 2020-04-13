@@ -1,0 +1,18 @@
+{% extends 'scrape/base.html' %}
+
+{% block title %} Create New List {% endblock %}
+
+{% block content %}
+<h3>Create Page</h3>
+<form method = "post" action="/create/" class="form-group">
+  <!-- need the csrf_token when making a file -->
+  {% csrf_token %}
+  <div class = "input-group mb-3">
+    <div class = "input-group-prepend">
+      <button type = "submit", name="save" class="btn btn-success">Create New</button>
+    </div>
+    {{form.name}}
+    <!-- .as_p or other ways -->
+  </div>
+</form>
+{% endblock %}
