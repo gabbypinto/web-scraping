@@ -17,10 +17,16 @@ from django.contrib import admin
 from django.urls import path, include
 from register import views as v
 
+
 urlpatterns = [
     #use include() when you include other URL patterms
     path('admin/', admin.site.urls),
     path('register/', v.register, name="register"),
     path('', include('scrape.urls')),
-    path('', include('django.contrib.auth.urls'))
+    path('', include('django.contrib.auth.urls')),
+
+
+    #path('accounts', include('django.contrib.auth.urls'))
+    # path('logout/', v.logout_view, name='logout'),
+    #path('login/', v.login, name='login'),
 ]

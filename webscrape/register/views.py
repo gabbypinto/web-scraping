@@ -13,3 +13,12 @@ def register(request):
         form = RegisterForm()
 
     return render(request, "register/register.html", {"form":form})
+
+# def logout_view(request):
+#     logout(request)
+    # Redirect to a success page.
+    # return redirect("register/logout.html")
+
+# def login(request):
+#     return render(request, "registration/login.html")
+    # redirect("/login")

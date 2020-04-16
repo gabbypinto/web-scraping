@@ -1,11 +1,15 @@
 {% extends 'scrape/base.html' %}
-<html>
-<head>
-<title>LOGOUT PAGE</title>
-</head>
 
-<body>
+{% block title %}
+Logout Page
+{% endblock %}
 
+{% block content %}
+<h1>You Logged out!</h1>
+{% endblock %}
+
+
+<!--
 {% if user.is_authenticated %}
 {{ request.user }} | <a href="#" onClick="document.getElementById('logoutform').submit()"><button type="button">Logout</button></a>
 <form id="logoutform" method="POST" action="{% url 'accounts:logout' %}">
@@ -19,13 +23,4 @@
 
 <br/><br/>
 
-{% for post in allposts %}
-
-<a href="/posts/{{post.id}}">{{ post.title }}</a>
-
-<br/><br/>
-
-{% endfor %}
-
-</body>
-</html>
+{% endfor %} -->

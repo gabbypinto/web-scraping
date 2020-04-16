@@ -1,13 +1,15 @@
 #from django.shortcuts import render
 
 # Create your views here.
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import ShoppingList, Item
 from .forms import CreateNewList
 from django.contrib.auth.models import User
+
+
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, get_object_or_404, redirect
+
 
 def index(request, id):
     ls = ShoppingList.objects.get(id=id) #the id starts at 2, 1 doesn't work
@@ -51,8 +53,3 @@ def create(request):
 #GET for modifying the database
 def view(request):
     return render(request, "scrape/view.html")
-
-def pagelogout(request):
-    if request.method == "POST":
-        logout(request)
-        return redirect('home')
