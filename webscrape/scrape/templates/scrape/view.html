@@ -6,6 +6,8 @@ View
 
 {% block content %}
   {% for td in user.shoppingList.all %}
-  <p><a href="/{{td.id}}">{{td.name}}</a></p>
+  <button type="button" class="btn btn-primary" id = "button">
+    <a id ="viewList" href="/{{td.id}}">{{td.name}}</a>
+  </button>
   {% endfor %}
 {% endblock %}

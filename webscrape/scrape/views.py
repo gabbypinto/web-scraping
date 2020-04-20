@@ -49,7 +49,13 @@ def create(request):
         form = CreateNewList()
 
     return render(request, "scrape/create.html", {"form":form})
+
 #POST for 'secret information' aka passwords
 #GET for modifying the database
+
+#the view function is for viewing a list
 def view(request):
     return render(request, "scrape/view.html")
+
+# def deleteList(request):
+#     ls = ShoppingList.objects.get(id=id)
