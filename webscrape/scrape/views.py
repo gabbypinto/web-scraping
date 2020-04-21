@@ -63,7 +63,4 @@ def create(request):
 def view(request):
     return render(request, "scrape/view.html")
 
-#def deleteList(request):
-#    ls = ShoppingList.objects.get(id=id)
-
 #def renameItem(request):
