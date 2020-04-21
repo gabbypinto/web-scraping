@@ -1,12 +1,9 @@
-#from django.shortcuts import render
-
 # Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import ShoppingList, Item
 from .forms import CreateNewList
 from django.contrib.auth.models import User
-
 
 from django.contrib.auth import authenticate, login, logout
 
@@ -30,6 +27,11 @@ def index(request, id):
                     ls.item_set.create(text = txt, complete=False)
                 else:
                     print("invalid")
+            elif request.POST.get("delete"):
+                for item in ls.item_set.all():
+                    if request.POST.get("c" + str(item.id)) == "clicked":
+                        #only deletes checked items
+                        item.delete()
         return render(request, "scrape/list.html",{"ls":ls})
     return render(request, "scrape/view.html",{})
 
@@ -57,5 +59,7 @@ def create(request):
 def view(request):
     return render(request, "scrape/view.html")
 
-# def deleteList(request):
-#     ls = ShoppingList.objects.get(id=id)
+#def deleteList(request):
+#    ls = ShoppingList.objects.get(id=id)
+
+#def renameItem(request):
