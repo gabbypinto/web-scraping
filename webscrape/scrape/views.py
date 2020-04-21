@@ -21,6 +21,7 @@ def index(request, id):
                     else:
                         item.complete = False
                     item.save()
+                    return render(request, "scrape/view.html",{})
             elif request.POST.get("newItem"):
                 txt = request.POST.get("new")
                 if len(txt) > 2:
@@ -30,8 +31,11 @@ def index(request, id):
             elif request.POST.get("delete"):
                 for item in ls.item_set.all():
                     if request.POST.get("c" + str(item.id)) == "clicked":
-                        #only deletes checked items
                         item.delete()
+            elif request.POST.get("deleteList"):
+                print("delete list")
+                ls.delete()
+                return render(request,"scrape/view.html",{})
         return render(request, "scrape/list.html",{"ls":ls})
     return render(request, "scrape/view.html",{})
 
