@@ -13,6 +13,12 @@
       overflow-x: :hidden;
       padding-top: 20px;
     }
+    .sidenav img {
+      float: left;
+      width: 150px;
+      height: 50px;
+      background: #555;
+    }
 
     .sidenav a {
       padding:6px 8px 6px 16px;
@@ -53,6 +59,9 @@
 
 <body>
   <div class = "sidenav">
+    {% load static %}
+    <img src="{% static 'scrape/images/logo.jpg' %}" alt="My Image"/>
+
     <a href="/">Home</a>
     <a href="/create">Create</a>
     <a href="/view">View</a>
