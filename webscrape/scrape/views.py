@@ -38,7 +38,7 @@ def index(request, id):
             elif request.POST.get("newItem"):
                 txt = request.POST.get("new")
                 if len(txt) > 2:
-                  ls.item_set.create(text = txt, complete=False)
+                  #ls.item_set.create(text = txt, complete=False)
                 	#Open Browser
                   browser = webdriver.Chrome(options=chrome_options,executable_path='/Users/gabbypinto/Documents/CPSC_Courses/CPSC_353/web-scraping/webscrape/scrape/chromedriver')
                   browser.minimize_window()
@@ -50,10 +50,10 @@ def index(request, id):
                      alert_obj.dismiss()
                 	# #User Inputs the link
                   browser.get(txt)
-                  print('hola')
+                  #print('hola')
                 	# # grabs the title of the product, which is usually tagged with a h1
                   productTitle = browser.find_element_by_tag_name('h1').text  #works for almost all websites
-                  print(productTitle)
+                  ls.item_set.create(text = productTitle + " " + txt, complete=False)
                   browser.close()
                 else:
                     print("invalid")
