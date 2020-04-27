@@ -53,7 +53,29 @@ def index(request, id):
                   #print('hola')
                 	# # grabs the title of the product, which is usually tagged with a h1
                   productTitle = browser.find_element_by_tag_name('h1').text  #works for almost all websites
-                  ls.item_set.create(text = productTitle + " " + txt, complete=False)
+
+                  try:
+                      price = browser.find_element_by_css_selector("span[id*='price']")
+                      print(price.text)
+                  except NoSuchElementException:
+                      pass
+                      try:
+                          price = browser.find_element_by_css_selector("span[class*='price']") #don't change this, this works for most websites
+                          print(price.text)
+                      except NoSuchElementException:
+                          pass
+                      try:
+                          price = browser.find_element_by_css_selector("div[id*='price']")
+                          print(price.text)
+                      except NoSuchElementException:
+                          pass
+                      try:
+                          price = browser.find_element_by_css_selector("div[class*='price']")
+                          print(price.text)
+                      except NoSuchElementException:
+                          pass
+
+                  ls.item_set.create(text = productTitle + " " + price.text, complete=False)
                   browser.close()
                 else:
                     print("invalid")
