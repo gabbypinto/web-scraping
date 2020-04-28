@@ -1,8 +1,8 @@
 # web-scraping
 
 * running instructions:
-  * docker image build -t scraper .
-  * docker container run --rm -it --name client scraper
+  * mkdir -p .pip_cache
+  * docker build -t django-markdown-editor .
 
 * if docker doesn't work  
   * cd webscrape
