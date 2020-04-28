@@ -9,7 +9,7 @@ chrome_options = Options()
 chrome_options.add_argument("--disable-extensions")
 chrome_options.add_argument('--ignore-certificate-errors')
 chrome_options.add_argument("--disable-notifications")
-# chrome_options.add_argument('--headless') <--research but not too important atm
+# chrome_options.add_argument('--headless') 
 #Open Browser
 browser = webdriver.Chrome(options=chrome_options,executable_path='/Users/gabbypinto/Documents/CPSC_Courses/CPSC_353/web-scraping/chromedriver')
 browser.minimize_window()
@@ -65,6 +65,3 @@ except NoSuchElementException:
     pass
 
 browser.close()
-
-# print(price.text)
-# print(price.size)

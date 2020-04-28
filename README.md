@@ -1,5 +1,13 @@
 # web-scraping
 
+* running instructions:
+  * docker image build -t scraper .
+  * docker container run --rm -it --name client scraper
+
+* if docker doesn't work  
+  * cd webscrape
+  * python3 manage.py runserver
+
 * references:
   * markdown: https://guides.github.com/features/mastering-markdown/
   * scraping with selenium:
@@ -9,5 +17,9 @@
     * https://saucelabs.com/resources/articles/selenium-tips-css-selectors
   * alert popups
     * http://allselenium.info/python-selenium-handle-alerts-prompts-confirmation-popups/
-=======
-  * django setup: https://docs.djangoproject.com/en/3.0/intro/tutorial01/
+  * dockerfile:
+    * https://docs.docker.com/compose/django/
+    * https://docs.docker.com/engine/reference/builder/
+    * https://www.caktusgroup.com/blog/2017/03/14/production-ready-dockerfile-your-python-django-app/
+  * pip install django?
+    * https://docs.djangoproject.com/en/3.0/topics/install/
