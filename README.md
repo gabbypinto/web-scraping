@@ -2,7 +2,12 @@
 
 * running instructions:
   * mkdir -p .pip_cache
-  * docker build -t django-markdown-editor .
+  * docker build -t scraper .
+  * docker run -it -p 8020:8020 \
+     -e DJANGO_SUPERUSER_USERNAME=admin \
+     -e DJANGO_SUPERUSER_PASSWORD=sekret1 \
+     -e DJANGO_SUPERUSER_EMAIL=admin@example.com \
+     scraper
 
 * if docker doesn't work  
   * cd webscrape
@@ -18,8 +23,4 @@
   * alert popups
     * http://allselenium.info/python-selenium-handle-alerts-prompts-confirmation-popups/
   * dockerfile:
-    * https://docs.docker.com/compose/django/
-    * https://docs.docker.com/engine/reference/builder/
-    * https://www.caktusgroup.com/blog/2017/03/14/production-ready-dockerfile-your-python-django-app/
-  * pip install django?
-    * https://docs.djangoproject.com/en/3.0/topics/install/
+    * https://semaphoreci.com/community/tutorials/dockerizing-a-python-django-web-application
