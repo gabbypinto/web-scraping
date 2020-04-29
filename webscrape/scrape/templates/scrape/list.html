@@ -16,7 +16,18 @@
             {% endif %}
           </div>
         </div>
-        <input type = "text", value="{{item.text}}" class="form-control">
+
+        <!-- below is the output box -->
+        <!-- <input type = "text", value="{{item.text}}" class="form-control"> -->
+        <div class="card w-75">
+          <div class="card-body">
+            <h5 class="card-title">{{item.text}}</h5>
+            <p class="card-text">{{item.text}}</p>
+            <a href="#" class="btn btn-primary">Button</a>
+          </div>
+        </div>
+
+
         <div class="input-group-append">
               <!-- delete button below -->
             <button class="btn btn-danger" type="submit" id="button-addon2" name="delete" value="delete">Delete</button>

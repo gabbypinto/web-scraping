@@ -50,36 +50,50 @@ def index(request, id):
                      alert_obj.dismiss()
                 	# #User Inputs the link
                   browser.get(txt)
-                	# # grabs the title of the product, which is usually tagged with a h1
+
+
+
+                # # grabs the title of the product, which is usually tagged with a h1
+
                   productTitle = browser.find_element_by_tag_name('h1').text  #works for almost all websites
+                  print('product title below?')
+                  print(productTitle)
+
+
                   productPrice = " "
                   try:
-                      print("hi")
+                      print("1")
                       price = browser.find_element_by_css_selector("span[class*='price']")
                       productPrice = price.text
                   except NoSuchElementException:
                      pass
                      try:
-                          print("hi2")
+                          print("2")
                           price = browser.find_element_by_css_selector("span[id*='price']") #don't change this, this works for most websites
                           print(price.text)
                           productPrice = price.text
                      except NoSuchElementException:
                         pass
-                     try:
-                         print("4")
-                         price = browser.find_element_by_css_selector("div[class*='price']")
-                         productPrice = price.text
-                     except NoSuchElementException:
-                         pass
-                     try:
-                         print('5')
-                         price = browser.find_element_by_css_selector("div[id='price']")
-                         productPrice = price.text
-                     except NoSuchElementException:
-                         pass
+                        try:
+                            print("3")
+                            price = browser.find_element_by_css_selector("div[class*='price']")
+                            productPrice = price.text
+                        except NoSuchElementException:
+                             pass
+                        try:
+                            print('4')
+                            price = browser.find_element_by_css_selector("div[id^='price']")
+                            productPrice = price.text
+                        except NoSuchElementException:
+                            pass
+                            try:
+                                print('4')
+                                price = browser.find_element_by_css_selector("div[id*='price']")
+                                productPrice = price.text
+                            except NoSuchElementException:
+                                pass
 
-                  print(productTitle)
+                  # print(productTitle)
                   print(productPrice)
                   ls.item_set.create(text = productTitle + " " + productPrice, complete=False)
                   browser.close()
