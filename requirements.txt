@@ -1,3 +1,4 @@
 Django
 selenium
 django-crispy-forms
+gunicorn
