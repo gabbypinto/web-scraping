@@ -109,18 +109,16 @@ def index(request, id):
                 ls.delete()
                 return render(request,"scrape/view.html",{})
             elif request.POST.get("editButton"):
-                print("edit button")
                 ls = ShoppingList.objects.get(id=id)
+                print(ls) #print the list
                 for item in ls.item_set.all():
-                     print(item.id)
+                     print(item.itemTitle) #print the productName
                      if request.POST.get("c" + str(item.id)) == "clicked":
-                          form = EditForm()
-                #          #newItem = ls.objects.get(pk=item.id)
-                          itemTitle  = item.itemTitle
+                          print(item.id) #prints a number
                           form = EditForm(request.POST,instance=item)
-                          print(form.errors)
                           if form.is_valid():
                              print("form is valid")
+                             form.save()
                 #             # n = form.cleaned_data["title"]
                 #
                 #              #t = Item(title=n)

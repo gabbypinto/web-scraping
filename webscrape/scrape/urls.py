@@ -12,6 +12,6 @@ urlpatterns = [
     path("",views.home, name="home"), #home page
     path("create/",views.create,name="create"),
     path("view/",views.view,name="view"),
-    path("edit/",views.view,name="edit"),
+    path("edit/<int:id>",views.view,name="edit"),
 
 ]
