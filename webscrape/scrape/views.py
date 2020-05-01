@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import ShoppingList, Item
-from .forms import CreateNewList, EditForm
+from .forms import CreateNewList
 from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate, login, logout
@@ -22,7 +22,6 @@ def index(request, id):
     chrome_options.add_argument('--ignore-certificate-errors')
     chrome_options.add_argument("--disable-notifications")
     chrome_options.add_argument("--headless")
-
     ls = ShoppingList.objects.get(id=id) #the id starts at 2, 1 doesn't work
     if ls in request.user.shoppingList.all():
         #{"save": ["save"], "c1":["clicked"]}
@@ -51,9 +50,16 @@ def index(request, id):
                      alert_obj.dismiss()
                 	# #User Inputs the link
                   browser.get(txt)
-                  # grabs the title of the product, which is usually tagged with a h1
+
+
+
+                # # grabs the title of the product, which is usually tagged with a h1
+
                   productTitle = browser.find_element_by_tag_name('h1').text  #works for almost all websites
-                  print("product title: ",productTitle)
+                  print('product title below?')
+                  print(productTitle)
+
+
                   productPrice = " "
                   try:
                       print("1")
@@ -64,6 +70,7 @@ def index(request, id):
                      try:
                           print("2")
                           price = browser.find_element_by_css_selector("span[id*='price']") #don't change this, this works for most websites
+                          print(price.text)
                           productPrice = price.text
                      except NoSuchElementException:
                         pass
@@ -74,29 +81,21 @@ def index(request, id):
                         except NoSuchElementException:
                              pass
                         try:
-                            print("4")
-                            price = browser.find_element_by_css_selector("div[class^='price']")
-                            if price.text[0] == "$":
-                                productPrice = price.text
-                                print("in try block: ",productPrice)
-                                print("end")
+                            print('4')
+                            price = browser.find_element_by_css_selector("div[id^='price']")
+                            productPrice = price.text
                         except NoSuchElementException:
                             pass
                             try:
-                                print('5')
-                                price = browser.find_element_by_css_selector("div[id^='price']")
-                                productPrice = price.text
-                            except NoSuchElementException:
-                                pass
-                            try:
-                                print('6')
+                                print('4')
                                 price = browser.find_element_by_css_selector("div[id*='price']")
                                 productPrice = price.text
                             except NoSuchElementException:
                                 pass
 
-                  #ls.item_set.create(text = productTitle + " " + productPrice, complete=False)
-                  ls.item_set.create(text = '', itemPrice = productPrice, itemTitle = productTitle, complete=False)
+                  # print(productTitle)
+                  print(productPrice)
+                  ls.item_set.create(text = productTitle + " " + productPrice, complete=False)
                   browser.close()
                 else:
                     print("invalid")
@@ -108,24 +107,6 @@ def index(request, id):
                 print("delete list")
                 ls.delete()
                 return render(request,"scrape/view.html",{})
-            elif request.POST.get("editButton"):
-                print("edit button")
-                ls = ShoppingList.objects.get(id=id)
-                for item in ls.item_set.all():
-                     print(item.id)
-                     if request.POST.get("c" + str(item.id)) == "clicked":
-                          form = EditForm()
-                #          #newItem = ls.objects.get(pk=item.id)
-                          itemTitle  = item.itemTitle
-                          form = EditForm(request.POST,instance=item)
-                          print(form.errors)
-                          if form.is_valid():
-                             print("form is valid")
-                #             # n = form.cleaned_data["title"]
-                #
-                #              #t = Item(title=n)
-                #              # t.save()
-                     return render(request,"scrape/edit.html")
         return render(request, "scrape/list.html",{"ls":ls})
     return render(request, "scrape/view.html",{})
 
@@ -137,7 +118,6 @@ def create(request):
         form = CreateNewList(request.POST)
         if form.is_valid():
             n = form.cleaned_data["name"]
-            print(n)
             t = ShoppingList(name=n)
             t.save()
             request.user.shoppingList.add(t)
@@ -147,23 +127,11 @@ def create(request):
 
     return render(request, "scrape/create.html", {"form":form})
 
+#POST for 'secret information' aka passwords
+#GET for modifying the database
+
 #the view function is for viewing a list
 def view(request):
     return render(request, "scrape/view.html")
 
-
-def edit(request, id):
-    if request.method == 'POST':
-        ls = ShoppingList.objects.get(id=id)
-        for item in ls.item_set.all():
-             if request.POST.get("c" + str(item.id)) == "clicked":
-                 print(str(item.itemTitle))
-                 form = EditForm(request.POST or None)
-                 print(form.is_valid())
-                 print(form.errors)
-                 if form.is_valid():
-                     print("in form valid block")
-                     #form.save()
-             return render(request,"scrape/edit.html")
-    else:
-        return render(request, "scrape/edit.html")
+#def renameItem(request):
