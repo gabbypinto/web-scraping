@@ -8,6 +8,7 @@
      -e DJANGO_SUPERUSER_PASSWORD=sekret1 \
      -e DJANGO_SUPERUSER_EMAIL=admin@example.com \
      scraper
+  * then visit: http://localhost:8020 
 
 * if docker doesn't work  
   * cd webscrape
