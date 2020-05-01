@@ -113,19 +113,8 @@ def index(request, id):
                 ls = ShoppingList.objects.get(id=id)
                 for item in ls.item_set.all():
                      print(item.id)
-                     if request.POST.get("c" + str(item.id)) == "clicked":
-                          form = EditForm()
-                #          #newItem = ls.objects.get(pk=item.id)
-                          itemTitle  = item.itemTitle
-                          form = EditForm(request.POST,instance=item)
-                          print(form.errors)
-                          if form.is_valid():
-                             print("form is valid")
-                #             # n = form.cleaned_data["title"]
-                #
-                #              #t = Item(title=n)
-                #              # t.save()
-                     return render(request,"scrape/edit.html")
+                     if request.POST.get("c" + str(item.id)) == "clicked":  
+                         return render(request,"scrape/edit.html")
         return render(request, "scrape/list.html",{"ls":ls})
     return render(request, "scrape/view.html",{})
 
@@ -150,20 +139,3 @@ def create(request):
 #the view function is for viewing a list
 def view(request):
     return render(request, "scrape/view.html")
-
-
-def edit(request, id):
-    if request.method == 'POST':
-        ls = ShoppingList.objects.get(id=id)
-        for item in ls.item_set.all():
-             if request.POST.get("c" + str(item.id)) == "clicked":
-                 print(str(item.itemTitle))
-                 form = EditForm(request.POST or None)
-                 print(form.is_valid())
-                 print(form.errors)
-                 if form.is_valid():
-                     print("in form valid block")
-                     #form.save()
-             return render(request,"scrape/edit.html")
-    else:
-        return render(request, "scrape/edit.html")
