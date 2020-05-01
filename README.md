@@ -1,21 +1,27 @@
 # web-scraping
 
-* running instructions:
-  * mkdir -p .pip_cache
-  * docker build -t scraper .
-  * docker run -it -p 8020:8020 \
-     -e DJANGO_SUPERUSER_USERNAME=admin \
-     -e DJANGO_SUPERUSER_PASSWORD=sekret1 \
-     -e DJANGO_SUPERUSER_EMAIL=admin@example.com \
-     scraper
-  * then visit: http://localhost:8020 
+* What is ScrapenSave?
+  * Our django-based project is a web application that allows the user to create a
+  shopping list and insert the link. In return, the program will return the product's name
+  and price. 
 
-* if docker doesn't work  
-  * cd webscrape
-  * python3 manage.py runserver
 
-* references:
-  * markdown: https://guides.github.com/features/mastering-markdown/
+* Running instructions:
+  1. "git clone" this repo in your terminal/command prompt
+  2. Type the following into your terminal in order to make and run your docker container
+    * mkdir -p .pip_cache
+    * docker build -t NAME .
+      * "NAME" can be whatever you want
+    * docker run -it -p 8020:8020 \
+       -e DJANGO_SUPERUSER_USERNAME=admin \
+       -e DJANGO_SUPERUSER_PASSWORD=sekret1 \
+       -e DJANGO_SUPERUSER_EMAIL=admin@example.com \
+       NAME
+       * "NAME" can be whatever you want
+  3. Visit: http://localhost:8020
+
+
+* References:
   * scraping with selenium:
     * https://selenium-python.readthedocs.io/locating-elements.html
     * https://stackoverflow.com/questions/51496232/how-to-extract-product-informationtitle-price-review-asin-from-all-amazon-p
